@@ -1,10 +1,13 @@
+import React from "react";
 import pasteleracherry from "../Assets/img/pasteleracherry.jpg"
 import pastelero from "../Assets/img/pastelero-1jpg.webp"
 import pistacho from "../Assets/img/pistacho.jpg"
 import dulcechocolate from "../Assets/img/haz dulces de chocolate.jpg"
 import pchocolate from "../Assets/img/haz un pastel de chocolate.jpg"
 import limon from "../Assets/img/haz un pie de limon.jpg"
-export default function home() {
+
+
+export default function Home() {
     const Productos = [
         {
             id: 1,
@@ -80,8 +83,8 @@ export default function home() {
                         <div className="container-fluid">
                             <div className="row">
                                 {Productos.map((prod) => (
-                                <div className="col-12 vol-sm-6 col-md-4 mb-4">
-                                    <div className="card h-100">
+                                <div className="col-12 vol-sm-6 col-md-4 mb-4" key={prod.id}>
+                                    <div className="card h-100" data-testid="producto">
                                         <img className="card-img-top" src={prod.imagen} alt={prod.titulo} />
                                         <div className="card-body">
                                             <h5 className="card-title">{prod.titulo}</h5>
