@@ -2,7 +2,9 @@ import logopasteleria from "../Assets/img/logopasteleria.png"
 import { Link } from "react-router-dom"
 export default function Header() {
     return (
-        <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
+        <header>
+        <nav className="navbar navbar-expand-lg navbar-dark">
+            <div className="container fluid">
             <nav className="navbar navbar-expand-lg pastel-navbar">
                 <div className="container-fluid">
                     <img className="logo" src={logopasteleria} alt="Logo Pastelería"/>
@@ -13,7 +15,7 @@ export default function Header() {
                             <span className="navbar-toggler-icon"></span>
                         </button>
 
-                        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div className="collapse navbar-collapse" id="header">
                             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li className="nav-item">
                                     <Link to="/" className="nav-link text-decoration-none">Inicio</Link>
@@ -23,8 +25,9 @@ export default function Header() {
                                 </li>
                                 <li className="nav-item"><a id="txtregistro" className="nav-link" href="registro.html">Registrarse</a>
                                 </li>
-                                <li className="nav-item"><a id="txtnoticias" className="nav-link"
-                                    href="https://www.duoc.cl/noticias/">Blogs y Noticias</a></li>
+                                <li className="nav-item">
+                                    <Link to="/noticias" className="nav-link text-decoration-none">Blogs y Noticias</Link>
+                                </li>
                                 <li className="nav-item"><a id="txtrecetas" className="nav-link" href="perfil-usuario.html">Perfil</a>
                                 </li>
                                 <li className="nav-item"><a id="txtconsejos" className="nav-link" href="#">Consejos</a></li>
@@ -47,6 +50,9 @@ export default function Header() {
                         </div>
                 </div>
             </nav>
+            </div>
         </nav>
+        </header>
             )
+
 }
