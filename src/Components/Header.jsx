@@ -3,10 +3,18 @@ import { Link } from "react-router-dom"
 export default function Header() {
     return (
         <header>
+<<<<<<< HEAD
             <nav className="navbar navbar-expand-lg navbar-dark">
                 <nav className="navbar navbar-expand-lg pastel-navbar">
                     <div className="container-fluid">
                         <img className="logo" src={logopasteleria} alt="Logo Pastelería" />
+=======
+        <nav className="navbar navbar-expand-lg navbar-dark">
+            <div className="container fluid">
+            <nav className="navbar navbar-expand-lg pastel-navbar">
+                <div className="container-fluid">
+                    <img className="logo" src={logopasteleria} alt="Logo Pastelería"/>
+>>>>>>> c68ef56e66a9b1d69c5276b3d34cb28df797f63c
                         <a className="navbar-brand ms-3" href="#">Pastelería Mil Sabores</a>
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -14,7 +22,7 @@ export default function Header() {
                             <span className="navbar-toggler-icon"></span>
                         </button>
 
-                        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div className="collapse navbar-collapse" id="header">
                             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li className="nav-item">
                                     <Link to="/" className="nav-link text-decoration-none">Inicio</Link>
@@ -28,8 +36,12 @@ export default function Header() {
                                 <li className="nav-item">
                                     <Link to="/noticias" className="nav-link text-decoration-none">Blogs y Noticias</Link>
                                 </li>
+<<<<<<< HEAD
                                 <li className="nav-item">
                                     <Link to="/Perfil" className="nav-link text-decoration-none">Perfil</Link>
+=======
+                                <li className="nav-item"><a id="txtrecetas" className="nav-link" href="perfil-usuario.html">Perfil</a>
+>>>>>>> c68ef56e66a9b1d69c5276b3d34cb28df797f63c
                                 </li>
                                 <li className="nav-item"><a id="txtconsejos" className="nav-link" href="#">Consejos</a></li>
                                 <li className="nav-item dropdown">
@@ -52,6 +64,14 @@ export default function Header() {
                     </div>
                 </nav>
             </nav>
+<<<<<<< HEAD
         </header>
     )
+=======
+            </div>
+        </nav>
+        </header>
+            )
+
+>>>>>>> c68ef56e66a9b1d69c5276b3d34cb28df797f63c
 }
