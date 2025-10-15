@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Home from './indice';
 
-describe('Home (Card)', () => { // agrupa un conjunto de tests bajo un nombre (en este caso "Home (Card)"). Sirve para el reporte final.
+describe('Indice (Card)', () => { // agrupa un conjunto de tests bajo un nombre (en este caso "Home (Card)"). Sirve para el reporte final.
   it('Busca que se renderizan 6 cards de producto', () => { // it describe el caso
     render(<Home />); // Render monta el componente en DOM virtual.
     const cards = screen.getAllByTestId('producto'); // Busca todos los elementos con data-testid="producto"
@@ -22,7 +22,7 @@ describe('Home (Card)', () => { // agrupa un conjunto de tests bajo un nombre (e
   });
 });
 
-describe('Elementos del Home', () => {
+describe('Elementos del Indice', () => {
   it('Busca titulo de productos', async () => {
     render(<Home />);
     const titulo = await screen.findByText(/Nuestros Productos/i);

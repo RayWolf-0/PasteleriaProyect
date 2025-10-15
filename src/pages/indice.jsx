@@ -4,7 +4,7 @@ import pistacho from "../Assets/img/pistacho.jpg"
 import dulcechocolate from "../Assets/img/haz dulces de chocolate.jpg"
 import pchocolate from "../Assets/img/haz un pastel de chocolate.jpg"
 import limon from "../Assets/img/haz un pie de limon.jpg"
-export default function home() {
+export default function Home() {
     const Productos = [
         {
             id: 1,

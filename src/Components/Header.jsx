@@ -2,10 +2,11 @@ import logopasteleria from "../Assets/img/logopasteleria.png"
 import { Link } from "react-router-dom"
 export default function Header() {
     return (
-        <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
-            <nav className="navbar navbar-expand-lg pastel-navbar">
-                <div className="container-fluid">
-                    <img className="logo" src={logopasteleria} alt="Logo Pastelería"/>
+        <header>
+            <nav className="navbar navbar-expand-lg navbar-dark">
+                <nav className="navbar navbar-expand-lg pastel-navbar">
+                    <div className="container-fluid">
+                        <img className="logo" src={logopasteleria} alt="Logo Pastelería" />
                         <a className="navbar-brand ms-3" href="#">Pastelería Mil Sabores</a>
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -21,11 +22,14 @@ export default function Header() {
                                 <li className="nav-item">
                                     <Link to="/login" className="nav-link text-decoration-none">Login</Link>
                                 </li>
-                                <li className="nav-item"><a id="txtregistro" className="nav-link" href="registro.html">Registrarse</a>
+                                <li className="nav-item">
+                                    <Link to="/registro" className="nav-link text-decoration-none">Registro</Link>
                                 </li>
-                                <li className="nav-item"><a id="txtnoticias" className="nav-link"
-                                    href="https://www.duoc.cl/noticias/">Blogs y Noticias</a></li>
-                                <li className="nav-item"><a id="txtrecetas" className="nav-link" href="perfil-usuario.html">Perfil</a>
+                                <li className="nav-item">
+                                    <Link to="/noticias" className="nav-link text-decoration-none">Blogs y Noticias</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link to="/Perfil" className="nav-link text-decoration-none">Perfil</Link>
                                 </li>
                                 <li className="nav-item"><a id="txtconsejos" className="nav-link" href="#">Consejos</a></li>
                                 <li className="nav-item dropdown">
@@ -41,12 +45,13 @@ export default function Header() {
                             </ul>
 
                             <form className="d-flex" role="search">
-                                <input className="form-control me-2" type="search" placeholder="Buscar..." aria-label="Buscar"/>
-                                    <button className="btn btn-buscar" type="submit">Buscar</button>
+                                <input className="form-control me-2" type="search" placeholder="Buscar..." aria-label="Buscar" />
+                                <button className="btn btn-buscar" type="submit">Buscar</button>
                             </form>
                         </div>
-                </div>
+                    </div>
+                </nav>
             </nav>
-        </nav>
-            )
+        </header>
+    )
 }
