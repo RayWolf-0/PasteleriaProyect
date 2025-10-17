@@ -5,11 +5,6 @@ import pistacho from "../Assets/img/pistacho.jpg"
 import dulcechocolate from "../Assets/img/haz dulces de chocolate.jpg"
 import pchocolate from "../Assets/img/haz un pastel de chocolate.jpg"
 import limon from "../Assets/img/haz un pie de limon.jpg"
-<<<<<<< HEAD
-=======
-
-
->>>>>>> c68ef56e66a9b1d69c5276b3d34cb28df797f63c
 export default function Home() {
     const Productos = [
         {
