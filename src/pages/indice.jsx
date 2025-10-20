@@ -48,6 +48,7 @@ export default function Home() {
 
     return (
         <div>
+            <br></br>
             <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel" data-bs-interval="10000">
                 <div className="carousel-inner">
                     <div className="carousel-item active">
@@ -87,7 +88,7 @@ export default function Home() {
                                         <div className="card-body">
                                             <h5 className="card-title">{prod.titulo}</h5>
                                             <p className="card-text"> Valor: {prod.precio}</p>
-                                            <button className="btn button" type="button">Añadir</button>
+                                            <button className="button" type="button">Añadir</button>
                                         </div>
                                     </div>
                                 </div>

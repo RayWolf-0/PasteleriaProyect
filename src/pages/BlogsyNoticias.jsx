@@ -1,7 +1,7 @@
 export default function BlogyNoticias(){
     return(
         <div>
-            <h1>
+            <h1 className="h2">
                 Blogs y Noticias
             </h1>
             <div className="ratio ratio-16x9">

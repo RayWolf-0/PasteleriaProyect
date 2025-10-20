@@ -13,12 +13,23 @@ export function AuthProvider({ children }) {
     else localStorage.removeItem("user");
   }, [user]);
 
+  // 🔐 LOGIN con roles
   const login = async (username, password) => {
+    // Credenciales de administrador
     if (username === "admin" && password === "123456") {
-      const u = { username: "admin" };
+      const u = { username: "admin", role: "admin" };
       setUser(u);
-      return { ok: true };
+      return { ok: true, user: u };
     }
+
+    // Credenciales de usuario normal
+    if (username === "usuario" && password === "654321") {
+      const u = { username: "usuario", role: "user" };
+      setUser(u);
+      return { ok: true, user: u };
+    }
+
+    // Si no coincide ninguno
     return { ok: false, message: "Usuario o contraseña incorrectos" };
   };
 
@@ -26,7 +37,13 @@ export function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, isAuthenticated: !!user, login, logout }}
+      value={{
+        user,
+        isAuthenticated: !!user,
+        isAdmin: user?.role === "admin",
+        login,
+        logout,
+      }}
     >
       {children}
     </AuthContext.Provider>

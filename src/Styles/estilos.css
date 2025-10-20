@@ -306,3 +306,230 @@ footer {
   font-weight: bold;
   transition: 0.3s;
 }
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+ul li {
+  margin-bottom: 8px;
+}
+
+/* ----- TÍTULOS ----- */
+h2 {
+  font-family: 'Pacifico', cursive;   /* Fuente artística y elegante */
+  color: #8B4513;                     /* Chocolate */
+  font-size: 1.8em;
+  margin-bottom: 10px;
+  border-left: 6px solid #FFC0CB;     /* Rosa suave */
+  padding-left: 10px;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+}
+
+/* ----- PÁRRAFOS ----- */
+p {
+  font-family: 'Lato', sans-serif;    /* Fuente legible y moderna */
+  color: #5D4037;                     /* Marrón oscuro */
+  font-size: 1.05em;
+  line-height: 1.7em;
+  margin-bottom: 15px;
+  text-align: justify;
+}
+
+/* Opcional: para resaltar negritas dentro de párrafos */
+p strong {
+  color: #8B4513;                     /* Resalta nombres o conceptos */
+}
+
+/* Opcional: para listas dentro de las tarjetas */
+ul li {
+  font-family: 'Lato', sans-serif;
+  color: #5D4037;
+  font-size: 1em;
+  line-height: 1.6em;
+}
+
+/* ----- CAMPOS DE CANTIDAD ----- */
+input.cantidad {
+  width: 50px;
+  padding: 5px;
+  border: 1px solid #B0BEC5;
+  border-radius: 5px;
+  text-align: center;
+}
+
+/* ----- SECCIÓN RESUMEN DEL PEDIDO ----- */
+.resumen {
+  background-color: #FFF5E1;
+  border: 2px solid #FFC0CB;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.resumen p {
+  font-size: 1.1em;
+  margin: 5px 0;
+}
+
+.total {
+  font-weight: bold;
+  color: #8B4513;
+  font-size: 1.3em;
+}
+
+.boton-compra {
+  background-color: #8B4513;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 1.1em;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.boton-compra:hover {
+  background-color: #5D4037;
+}
+
+/* ----- SECCIÓN ESTADO DEL PEDIDO ----- */
+.estado-pedido {
+  background-color: #FFF5E1;
+  border: 2px solid #FFC0CB;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 15px;
+}
+
+.progreso {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.etapa {
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 5px;
+  font-weight: bold;
+  color: white;
+}
+
+.etapa.completada {
+  background-color: #8B4513; /* Chocolate */
+}
+
+.etapa.actual {
+  background-color: #FFC0CB; /* Rosa suave */
+  color: #5D4037;
+}
+
+.etapa.pendiente {
+  background-color: #B0BEC5; /* Gris claro */
+}
+
+.mensaje-estado {
+  font-size: 1.1em;
+  color: #5D4037;
+  margin-top: 15px;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  background-color: #fff3e6;
+}
+
+.mi-texto {
+  font-family: 'Pacifico', cursive;
+  color: #5b2c04;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.card {
+  border: none;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  border-radius: 10px;
+}
+
+.button {
+  background-color: #f8a5b0;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 12px;
+  transition: 0.3s;
+}
+
+.button:hover {
+  background-color: #e57c8c;
+  color: #fff;
+}
+
+/* === AJUSTES VISUALES PARA ADMIN === */
+
+/* Tarjetas con borde rosado decorativo */
+.card {
+  position: relative;
+  border: none;
+  background-color: #fff;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+/* Línea rosada lateral */
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 100%;
+  background-color: #FFC0CB;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+/* Títulos principales */
+.mi-texto {
+  font-family: 'Pacifico', cursive;
+  color: #8B4513;
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+/* Tablas con estilo pastel */
+.table {
+  border-radius: 10px;
+  overflow: hidden;
+  font-size: 0.95rem;
+  background-color: #fff;
+}
+
+.table th {
+  background-color: #FFF8FB;
+  color: #8B4513;
+  font-weight: bold;
+  border-bottom: 2px solid #FFE3EC;
+}
+
+.table td {
+  color: #5D4037;
+  border-color: #FFE3EC;
+}
+
+/* Texto de enlaces o botones dentro de admin */
+.text-center {
+  color: #B7625C;
+  font-weight: 500;
+}

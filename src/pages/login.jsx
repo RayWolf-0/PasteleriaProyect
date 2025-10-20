@@ -44,7 +44,7 @@ export default function Login() {
     return (
         <div>
             <Helmet>
-                <title>Login</title>
+                <title className="h2">Login</title>
                 <meta name="description" content="Página Login" />
             </Helmet>
 
@@ -96,7 +96,7 @@ export default function Login() {
                     <div className="mb-3">
                         <button
                             id="btnLogin"
-                            className="btn button"
+                            className="button"
                             type="button"
                             onClick={manejarLogin}
                         >
@@ -105,9 +105,11 @@ export default function Login() {
                     </div>
 
                     <div className="text-muted small">
-                        <strong>Demo:</strong> usuario <code>admin</code> — clave{" "}
-                        <code>123456</code>
+                        <strong>Demo:</strong><br />
+                        Admin → usuario <code>admin</code> — clave <code>123456</code><br />
+                        Usuario → usuario <code>usuario</code> — clave <code>654321</code>
                     </div>
+
                 </div>
             </main>
 

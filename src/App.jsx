@@ -12,6 +12,9 @@ import Footer from './Components/Footer';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js"
 import { AuthProvider } from "./auth/AuthContext";
+import Admin from './pages/Administrador';
+import Carrito from './pages/carrito';
+import Pedido from './pages/pedido';
 
 function App() {
   return (
@@ -25,6 +28,9 @@ function App() {
           <Route path="/Perfil" element={<Perfil />}/>
           <Route path="/noticias" element={<BlogsyNoticias />}/>
           <Route path="/Registro" element={<Registro />}/>
+          <Route path="/Administrador" element={<Admin />}/>
+          <Route path="/carrito" element={<Carrito />}/>
+          <Route path="/pedido" element={<Pedido />}/>
         </Routes>
       <Footer />
       </AuthProvider>
