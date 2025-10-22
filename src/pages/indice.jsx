@@ -49,7 +49,7 @@ export default function Home() {
     return (
         <div>
             <br></br>
-            <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel" data-bs-interval="10000">
+            <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel" data-bs-interval="10">
                 <div className="carousel-inner">
                     <div className="carousel-item active">
                         <img className="imgCarrusel rounded mx-auto d-block img-fluid" src={pasteleracherry}

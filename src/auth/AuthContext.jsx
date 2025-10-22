@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-const AuthContext = createContext(null);
+export const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(() => {
@@ -13,7 +13,7 @@ export function AuthProvider({ children }) {
     else localStorage.removeItem("user");
   }, [user]);
 
-  // 🔐 LOGIN con roles
+  //LOGIN con roles
   const login = async (username, password) => {
     // Credenciales de administrador
     if (username === "admin" && password === "123456") {
