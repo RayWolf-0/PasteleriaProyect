@@ -15,12 +15,15 @@ import { AuthProvider } from "./auth/AuthContext";
 import Admin from './pages/Administrador';
 import Carrito from './pages/carrito';
 import Pedido from './pages/pedido';
+import { CarritoProvider } from "./auth/CarritoContext";
+
 
 function App() {
   return (
     <div className='App'>
       <div>
       <AuthProvider>
+      <CarritoProvider>
       <Header />
         <Routes>
           <Route path="/" element={<Indice />}/>
@@ -33,6 +36,7 @@ function App() {
           <Route path="/pedido" element={<Pedido />}/>
         </Routes>
       <Footer />
+      </CarritoProvider>
       </AuthProvider>
       </div>
         

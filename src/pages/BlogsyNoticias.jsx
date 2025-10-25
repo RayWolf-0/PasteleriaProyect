@@ -6,7 +6,7 @@ export default function BlogyNoticias(){
             </h1>
             <div className="ratio ratio-16x9">
                 <iframe src="https://elpais.com/noticias/pasteleria/" 
-                    frameborder="0"
+                    frameBorder={0}
                     title="Blogs y Noticias"
                     loading="lazy"
                     style={{border:0}}

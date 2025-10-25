@@ -81,7 +81,7 @@ export default function Header() {
 
               {/*usuario común */}
               {user?.role === "user" && (
-                <ul>
+                <>
                   <li className="nav-item">
                     <Link
                       to="/perfil"
@@ -106,7 +106,7 @@ export default function Header() {
                       Pedido
                     </Link>
                   </li>
-                </ul>
+                </>
               )}
 
               {/*admin */}
