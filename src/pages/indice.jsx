@@ -6,6 +6,9 @@ import pistacho from "../Assets/img/pistacho.jpg";
 import dulcechocolate from "../Assets/img/haz dulces de chocolate.jpg";
 import pchocolate from "../Assets/img/haz un pastel de chocolate.jpg";
 import limon from "../Assets/img/haz un pie de limon.jpg";
+import dufresas from "../Assets/img/haz dulces de fresa.jpg"
+import paletas from "../Assets/img/haz paletas de caramelo de colores.jpg"
+import pavellana from "../Assets/img/haz un pastel de avellanas.jpg"
 export default function Home() {
   const { agregarProducto } = useCarrito(); 
 
@@ -30,21 +33,21 @@ export default function Home() {
     },
     {
       id: 4,
-      titulo: "Bombones de chocolate 2",
+      titulo: "Dulces de Frutilla",
       precio: 1500,
-      imagen: dulcechocolate,
+      imagen: dufresas,
     },
     {
       id: 5,
-      titulo: "Pastel de chocolate 2",
-      precio: 20000,
-      imagen: pchocolate,
+      titulo: "Paletas de caramelo",
+      precio: 2000,
+      imagen: paletas,
     },
     {
       id: 6,
-      titulo: "Pie de Limón 2",
-      precio: 18000,
-      imagen: limon,
+      titulo: "Pastel de avellanas",
+      precio: 30000,
+      imagen: pavellana,
     },
   ];
 
@@ -55,7 +58,7 @@ export default function Home() {
         id="carouselExampleAutoplaying"
         className="carousel slide"
         data-bs-ride="carousel"
-        data-bs-interval="10"
+        data-bs-interval="1000"
       >
         <div className="carousel-inner">
           <div className="carousel-item active">

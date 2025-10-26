@@ -1,13 +1,42 @@
 import { useCarrito } from "../auth/CarritoContext";
-import ColeccionCarrito from "../Components/ColeccionCarrito";
-export default function carrito() {
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
+export default function Carrito() {
+  const { carrito, eliminarProducto, vaciarCarrito } = useCarrito();
+  const [mostrarModal, setMostrarModal] = useState(false);
+  const navigate = useNavigate();
+
+  const calcularTotal = () =>
+    carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
+
+  const pagarPedido = () => {
+    if (carrito.length === 0) return;
+    setMostrarModal(true);
+    setTimeout(() => {
+      setMostrarModal(false);
+      vaciarCarrito();
+      navigate("/pedido");
+    }, 2000);
+  };
+
+  if (carrito.length === 0) {
+    return (
+      <main>
+        <div className="card p-3 text-center mt-4">
+          <h2 className="mi-texto">Tu carrito está vacío 🛒</h2>
+          <p>Agrega productos desde el menú para verlos aquí.</p>
+        </div>
+      </main>
+    );
+  }
+
   return (
     <main>
-      <div className="card">
+      <div className="card p-3">
         <h2>Carrito de Compras</h2>
-        <p>Revisa los productos seleccionados antes de finalizar tu compra.</p>
 
-        <table>
+        <table className="table">
           <thead>
             <tr>
               <th>Producto</th>
@@ -18,68 +47,64 @@ export default function carrito() {
             </tr>
           </thead>
           <tbody>
+            {carrito.map((item) => (
+              <tr key={item.id}>
+                <td>{item.titulo}</td>
+                <td>{item.cantidad}</td>
+                <td>${item.precio.toLocaleString("es-CL")}</td>
+                <td>${(item.precio * item.cantidad).toLocaleString("es-CL")}</td>
+                <td>
+                  <button
+                    className="boton-compra"
+                    onClick={() => eliminarProducto(item.id)}
+                  >
+                    Eliminar
+                  </button>
+                </td>
+              </tr>
+            ))}
+
             <tr>
-              <td>Torta Cuadrada de Chocolate</td>
-              <td>
-                <input
-                  type="number"
-                  defaultValue={1}
-                  min="1"
-                  className="cantidad"
-                ></input>
+              <td colSpan="3" className="text-end fw-bold">
+                Total:
               </td>
-              <td>$45.000</td>
-              <td>$45.000</td>
-              <td>
-                <button className="boton-compra">Eliminar</button>
+              <td className="fw-bold">
+                ${calcularTotal().toLocaleString("es-CL")}
               </td>
-            </tr>
-            <tr>
-              <td>Tiramisú Clásico</td>
-              <td>
-                <input
-                  type="number"
-                  defaultValue={2}
-                  min="1"
-                  className="cantidad"
-                ></input>
-              </td>
-              <td>$5.500</td>
-              <td>$11.000</td>
-              <td>
-                <button className="boton-compra">Eliminar</button>
-              </td>
+              <td></td>
             </tr>
           </tbody>
         </table>
 
-        <div className="resumen">
-          <h2>Resumen del Pedido</h2>
-          <p>
-            <strong>Subtotal:</strong> $56.000
-          </p>
-          <p>
-            <strong>Descuento (Mayor de 50):</strong> -50%
-          </p>
-          <p>
-            <strong>Total a pagar:</strong>{" "}
-            <span className="total">$28.000</span>
-          </p>
-          <button className="boton-compra">Finalizar Compra</button>
-        </div>
-
-        <div className="card">
-          <h2>Recomendaciones para Ti</h2>
-          <p>
-            Basado en tus preferencias, podrías disfrutar de estos productos:
-          </p>
-          <ul>
-            <li>Torta Sin Azúcar de Naranja</li>
-            <li>Torta Vegana de Chocolate</li>
-            <li>Galletas Veganas de Avena</li>
-          </ul>
+        <div className="resumen mt-3 text-center">
+          <button className="boton-compra me-2" onClick={vaciarCarrito}>
+            Vaciar carrito
+          </button>
+          <button className="boton-compra" onClick={pagarPedido}>
+            Pagar
+          </button>
         </div>
       </div>
+
+      {mostrarModal && (
+        <div
+          className="modal fade show"
+          style={{
+            display: "block",
+            backgroundColor: "rgba(0,0,0,0.5)",
+          }}
+        >
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content text-center p-4">
+              <h4 className="mi-texto">Pedido en proceso 🚚</h4>
+              <p>Redirigiendo a la página de pedidos...</p>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
+
+
+
