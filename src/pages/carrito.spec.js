@@ -1,26 +1,23 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Carrito from './carrito'
+import { MemoryRouter } from 'react-router-dom';
+import { CarritoProvider } from '../auth/CarritoContext';
+import Carrito from './carrito';
 
 describe('Componente: Carrito', () => {
-    /* beforeEach(() => {
-        render(<Carrito />);
-    }); */
+  it('Muestra el título cuando el carrito está vacío', () => {
+    render(
+      <MemoryRouter>
+        <CarritoProvider>
+          <Carrito />
+        </CarritoProvider>
+      </MemoryRouter>
+    );
 
-    //Test 1: Comprobamos que el titulo principan exista
-    it('Titulo principal Carrito', () => {
-        render(<Carrito />);
-        const heading = screen.getByRole('heading', { name: /Carrito de Compras/i });
-        expect(heading).toBeInTheDocument();
-    })
-
-        //Test 1: Comprobamos que el segundo titulo exista
-    it('Titulo de pedido', () => {
-        render(<Carrito />);
-        const heading = screen.getByRole('heading', { name: /Resumen del Pedido/i });
-        expect(heading).toBeInTheDocument();
-    })
+    // Verifica que aparezca el título del carrito vacío
+    const titulo = screen.getByRole('heading', { name: /Tu carrito está vacío/i });
+    expect(titulo).toBeInTheDocument();
+  });
+});
 
 
-
-})

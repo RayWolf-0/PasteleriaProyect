@@ -42,7 +42,7 @@ export default function Login() {
     };
 
     return (
-        <div>
+        <div className="mi-fondo ">
             <Helmet>
                 <title className="h2">Login</title>
                 <meta name="description" content="Página Login" />

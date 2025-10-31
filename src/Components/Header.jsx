@@ -22,15 +22,17 @@ export default function Header() {
           </a>
 
           <button
-            className="navbar-toggler"
+            className="navbar-toggler pastel-toggler"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
+            data-bs-target="#header"
+            aria-controls="header"
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span className="navbar-toggler-icon"></span>
+            <span className="toggler-bar"></span>
+            <span className="toggler-bar"></span>
+            <span className="toggler-bar"></span>
           </button>
 
           <div className="collapse navbar-collapse" id="header">

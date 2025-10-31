@@ -1,6 +1,6 @@
 export default function Registro() {
     return (
-        <div>
+        <div className="mi-fondo ">
             <main className="col-md-12">
                 <div className="d-flex flex-column justify-content-center align-items-center vh-100">
                     <h2>Regitro de usuario</h2>

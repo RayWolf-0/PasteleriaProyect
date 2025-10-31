@@ -1,6 +1,6 @@
 export default function BlogyNoticias(){
     return(
-        <div>
+        <div className="mi-fondo ">
             <h1 className="h2">
                 Blogs y Noticias
             </h1>

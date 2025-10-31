@@ -52,7 +52,7 @@ export default function Home() {
   ];
 
   return (
-    <div>
+    <div className="mi-fondo ">
       <br />
       <div
         id="carouselExampleAutoplaying"
