@@ -44,7 +44,7 @@ jobs:
       - name: Ejecutar pruebas unitarias (Karma + Jasmine)
         run: npm run test:ui
 
-  # === IE3: Escaneo de dependencias y análisis de código ===
+   # === IE3: Escaneo de dependencias y análisis de código ===
   scan:
     runs-on: ubuntu-latest
     needs: test
@@ -52,11 +52,25 @@ jobs:
       - name: Descargar código
         uses: actions/checkout@v4
 
-      - name: Escaneo básico de dependencias (npm audit)
-        run: npm audit --audit-level=moderate || true
+      - name: Instalar dependencias
+        run: npm ci
 
-      - name: Simular análisis de calidad (SonarQube / Snyk)
-        run: echo "Análisis de seguridad y calidad completado ✅"
+      # Escaneo básico de vulnerabilidades
+      - name: Escanear vulnerabilidades críticas
+        run: |
+          npm audit --audit-level=critical
+        continue-on-error: false  # 🚫 Bloquea el pipeline si se detectan vulnerabilidades críticas
+
+      # Escaneo más amplio (alerta, no bloquea)
+      - name: Escanear vulnerabilidades altas o moderadas
+        run: |
+          npm audit --audit-level=moderate || echo "⚠️ Vulnerabilidades detectadas (moderadas o bajas)."
+        continue-on-error: true  # ⚠️ Permite continuar, pero genera advertencia
+
+      # Simular análisis de calidad (SonarQube o Snyk)
+      - name: Simular análisis de calidad
+        run: echo "✅ Análisis de seguridad y calidad completado"
+
 
   # === IE4: Despliegue simulado con Docker Compose ===
   deploy:
