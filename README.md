@@ -1,70 +1,34 @@
-# Getting Started with Create React App
+Proyecto Pastelería React – Pipeline CI/CD
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este proyecto implementa un pipeline automatizado con GitHub Actions para garantizar la integración, la calidad y el despliegue continuo del sistema.
 
-## Available Scripts
+Descripción General
 
-In the project directory, you can run:
+El pipeline CI/CD integra las fases de construcción, pruebas, análisis y despliegue del proyecto, asegurando trazabilidad, control de calidad y entornos reproducibles mediante contenedores Docker.
 
-### `npm start`
+Estructura del Pipeline
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Archivo principal:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+.github/workflows/pipeline.yml
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Ejecución automática:
+El pipeline se ejecuta automáticamente cada vez que se realiza un push o pull request en la rama master.
 
-### `npm run build`
+Etapa	Descripción	Indicador
+Build	Construcción de la imagen Docker del proyecto.	IE1
+Test	Ejecución de pruebas unitarias con Karma y Jasmine.	IE2
+Scan	Escaneo de dependencias y análisis de vulnerabilidades.	IE3
+Deploy	Despliegue simulado mediante Docker Compose.	IE4
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Trazabilidad:
+Todas las ejecuciones del pipeline se registran en la pestaña Actions de GitHub.
+Se conserva la información del commit, autor y estado de cada etapa.
+Permite auditar y reproducir errores fácilmente.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Calidad:
+Las pruebas unitarias validan la funcionalidad de los componentes del sistema.
+Los escaneos de seguridad garantizan dependencias seguras.
+El uso de Docker y Docker Compose mantiene entornos estables y reproducibles.
+El pipeline automatiza validaciones, reduciendo errores humanos.
