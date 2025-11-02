@@ -44,6 +44,7 @@ jobs:
 
 
 
+
   # IE3 - Escaneo de dependencias y análisis de código
   scan:
     runs-on: ubuntu-latest
