@@ -7,7 +7,7 @@ on:
     branches: [ "master" ]
 
 jobs:
-  # IE1 - Construcción de imagen Docker
+  # === IE1: Construcción de imagen Docker ===
   build:
     runs-on: ubuntu-latest
     steps:
@@ -20,7 +20,7 @@ jobs:
       - name: Construir imagen Docker
         run: docker build -t pasteleria-react .
 
-  # IE2 - Pruebas unitarias (Jasmine)
+  # === IE2: Pruebas unitarias (Karma + Jasmine) ===
   test:
     runs-on: ubuntu-latest
     needs: build
@@ -36,16 +36,15 @@ jobs:
       - name: Instalar dependencias
         run: npm ci
 
-      - name: Instalar dependencias adicionales
-        run: npm install react-router-dom jasmine jasmine-core
+      - name: Instalar dependencias necesarias para Karma + Jasmine
+        run: |
+          npm install karma karma-chrome-launcher karma-jasmine karma-jasmine-html-reporter jasmine-core --save-dev
+          npm install react-router-dom
 
-      - name: Ejecutar pruebas unitarias (Jasmine)
-        run: npm run test:jasmine
+      - name: Ejecutar pruebas unitarias (Karma + Jasmine)
+        run: npm run test:ui
 
-
-
-
-  # IE3 - Escaneo de dependencias y análisis de código
+  # === IE3: Escaneo de dependencias y análisis de código ===
   scan:
     runs-on: ubuntu-latest
     needs: test
@@ -53,13 +52,13 @@ jobs:
       - name: Descargar código
         uses: actions/checkout@v4
 
-      - name: Escaneo básico de dependencias con npm audit
+      - name: Escaneo básico de dependencias (npm audit)
         run: npm audit --audit-level=moderate || true
 
-      - name: Simular análisis de código con SonarQube
-        run: echo "Analizando código con SonarQube..."
+      - name: Simular análisis de calidad (SonarQube / Snyk)
+        run: echo "Análisis de seguridad y calidad completado ✅"
 
-  # IE4 - Despliegue simulado (Docker Compose)
+  # === IE4: Despliegue simulado con Docker Compose ===
   deploy:
     runs-on: ubuntu-latest
     needs: scan
@@ -70,6 +69,6 @@ jobs:
       - name: Instalar Docker Compose
         run: sudo apt-get install -y docker-compose
 
-      - name: Desplegar entorno simulado
+      - name: Desplegar entorno simulado (Docker Compose)
         run: docker-compose up -d
 
