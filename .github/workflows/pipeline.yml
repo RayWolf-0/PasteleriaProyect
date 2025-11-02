@@ -2,7 +2,9 @@ name: Pipeline Pastelería
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
 
 jobs:
   # IE1 - Construcción de imagen Docker
@@ -48,7 +50,7 @@ jobs:
       - name: Escaneo básico de dependencias con npm audit
         run: npm audit --audit-level=moderate || true
 
-      - name: Análisis de código con SonarQube (simulado)
+      - name: Simular análisis de código con SonarQube
         run: echo "Analizando código con SonarQube..."
 
   # IE4 - Despliegue simulado (Docker Compose)
@@ -64,3 +66,4 @@ jobs:
 
       - name: Desplegar entorno simulado
         run: docker-compose up -d
+
