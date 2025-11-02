@@ -36,8 +36,12 @@ jobs:
       - name: Instalar dependencias
         run: npm ci
 
-      - name: Ejecutar pruebas unitarias
+      - name: Instalar dependencias adicionales
+        run: npm install react-router-dom
+
+      - name: Ejecutar pruebas unitarias (Jest)
         run: npm test -- --watchAll=false
+
 
   # IE3 - Escaneo de dependencias y análisis de código
   scan:
