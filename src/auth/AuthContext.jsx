@@ -14,15 +14,13 @@ export function AuthProvider({ children }) {
     else localStorage.removeItem("user");
   }, [user]);
 
-  // LOGIN DIRECTO AL MICROSERVICIO
   const login = async (email, password) => {
     try {
       const usuario = await loginUsuario(email, password);
 
-      // Normalizamos el valor del rol
       const usuarioNormalizado = {
         ...usuario,
-        role: usuario.tipo_usuario?.toLowerCase(), // ejemplo: "cliente", "admin"
+        role: usuario.tipo_usuario?.toLowerCase(), 
       };
 
       setUser(usuarioNormalizado);

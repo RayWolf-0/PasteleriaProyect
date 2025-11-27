@@ -7,7 +7,6 @@ export default function Login() {
     const navigate = useNavigate();
     const { login, isAuthenticated } = useAuth();
 
-    // AHORA SE USA EMAIL
     const [email, setEmail] = useState("");
     const [contrasena, setContrasena] = useState("");
     const [errorInline, setErrorInline] = useState("");
