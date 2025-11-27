@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { loginUsuario } from "../Api/usuarioService";
 
 export const AuthContext = createContext(null);
 
@@ -13,24 +14,27 @@ export function AuthProvider({ children }) {
     else localStorage.removeItem("user");
   }, [user]);
 
-  //LOGIN con roles
-  const login = async (username, password) => {
-    // Credenciales de administrador
-    if (username === "admin" && password === "123456") {
-      const u = { username: "admin", role: "admin" };
-      setUser(u);
-      return { ok: true, user: u };
-    }
+  // LOGIN DIRECTO AL MICROSERVICIO
+  const login = async (email, password) => {
+    try {
+      const usuario = await loginUsuario(email, password);
 
-    // Credenciales de usuario normal
-    if (username === "usuario" && password === "654321") {
-      const u = { username: "usuario", role: "user" };
-      setUser(u);
-      return { ok: true, user: u };
-    }
+      // Normalizamos el valor del rol
+      const usuarioNormalizado = {
+        ...usuario,
+        role: usuario.tipo_usuario?.toLowerCase(), // ejemplo: "cliente", "admin"
+      };
 
-    // Si no coincide ninguno
-    return { ok: false, message: "Usuario o contraseña incorrectos" };
+      setUser(usuarioNormalizado);
+
+      return { ok: true, user: usuarioNormalizado };
+    } catch (error) {
+      console.error("Error en login:", error);
+      return {
+        ok: false,
+        message: "Credenciales incorrectas o servidor no disponible",
+      };
+    }
   };
 
   const logout = () => setUser(null);
@@ -53,3 +57,13 @@ export function AuthProvider({ children }) {
 export function useAuth() {
   return useContext(AuthContext);
 }
+
+
+
+
+
+
+
+
+
+

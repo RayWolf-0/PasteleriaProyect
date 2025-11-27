@@ -7,7 +7,8 @@ export default function Login() {
     const navigate = useNavigate();
     const { login, isAuthenticated } = useAuth();
 
-    const [usuario, setUsuario] = useState("");
+    // AHORA SE USA EMAIL
+    const [email, setEmail] = useState("");
     const [contrasena, setContrasena] = useState("");
     const [errorInline, setErrorInline] = useState("");
 
@@ -17,17 +18,19 @@ export default function Login() {
 
     const mostrarModalError = () => {
         const modalEl = document.getElementById("loginError");
-        if (modalEl && window.bootstrap && window.bootstrap.Modal) {
+        if (modalEl && window.bootstrap?.Modal) {
             const modal = new window.bootstrap.Modal(modalEl);
             modal.show();
         } else {
-            setErrorInline("Usuario o contraseña incorrecta");
+            setErrorInline("Email o contraseña incorrecta");
         }
     };
 
     const manejarLogin = async () => {
         setErrorInline("");
-        const res = await login(usuario.trim(), contrasena);
+
+        const res = await login(email.trim(), contrasena);
+
         if (res.ok) {
             navigate("/", { replace: true });
         } else {
@@ -36,13 +39,11 @@ export default function Login() {
     };
 
     const manejarEnter = (e) => {
-        if (e.key === "Enter") {
-            manejarLogin();
-        }
+        if (e.key === "Enter") manejarLogin();
     };
 
     return (
-        <div className="mi-fondo ">
+        <div className="mi-fondo">
             <Helmet>
                 <title className="h2">Login</title>
                 <meta name="description" content="Página Login" />
@@ -56,16 +57,15 @@ export default function Login() {
                     <h2>Inicio de sesión</h2>
 
                     <div className="mb-3 text-start">
-                        <label htmlFor="usuario" className="form-label">
-                            Usuario:
+                        <label htmlFor="email" className="form-label">
+                            Email:
                         </label>
                         <input
-                            type="text"
-                            name="usuario"
-                            id="usuario"
+                            type="email"
+                            id="email"
                             className="form-control"
-                            value={usuario}
-                            onChange={(e) => setUsuario(e.target.value)}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                             onKeyDown={manejarEnter}
                             autoComplete="username"
                         />
@@ -77,7 +77,6 @@ export default function Login() {
                         </label>
                         <input
                             type="password"
-                            name="contrasena"
                             id="contrasena"
                             className="form-control"
                             value={contrasena}
@@ -106,10 +105,8 @@ export default function Login() {
 
                     <div className="text-muted small">
                         <strong>Demo:</strong><br />
-                        Admin → usuario <code>admin</code> — clave <code>123456</code><br />
-                        Usuario → usuario <code>usuario</code> — clave <code>654321</code>
+                        Usuario → email <code>usuario@test.com</code> — clave <code>123456</code>
                     </div>
-
                 </div>
             </main>
 
@@ -134,7 +131,7 @@ export default function Login() {
                             ></button>
                         </div>
                         <div className="modal-body">
-                            <p>Usuario o contraseña incorrecta</p>
+                            <p>Email o contraseña incorrecta</p>
                         </div>
                         <div className="modal-footer">
                             <button

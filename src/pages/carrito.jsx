@@ -1,30 +1,51 @@
 import { useCarrito } from "../auth/CarritoContext";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { registrarVenta } from "../Api/ventaService";
+import { useAuth } from "../auth/AuthContext";
 
 export default function Carrito() {
   const { carrito, eliminarProducto, vaciarCarrito } = useCarrito();
+  const { user } = useAuth();
   const [mostrarModal, setMostrarModal] = useState(false);
   const navigate = useNavigate();
 
   const calcularTotal = () =>
     carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
 
-  const pagarPedido = () => {
+  const pagarPedido = async () => {
     if (carrito.length === 0) return;
-    setMostrarModal(true);
-    setTimeout(() => {
-      setMostrarModal(false);
-      vaciarCarrito();
-      navigate("/pedido");
-    }, 2000);
+
+    try {
+      const venta = {
+        idVenta: "VENT-" + Math.floor(Math.random() * 900000 + 100000),
+        idUsuario: user.idUsuario,
+        fechaVenta: new Date().toISOString().split("T")[0],
+        montoTotal: calcularTotal(),
+      };
+
+
+      await registrarVenta(venta);
+
+      setMostrarModal(true);
+
+      setTimeout(() => {
+        setMostrarModal(false);
+        vaciarCarrito();
+        navigate("/pedido");
+      }, 2000);
+
+    } catch (error) {
+      console.error("Error al registrar la venta:", error);
+      alert("No se pudo registrar la venta.");
+    }
   };
 
   if (carrito.length === 0) {
     return (
       <main>
         <div className="card p-3 text-center mt-4">
-          <h2 className="mi-texto">Tu carrito está vacío 🛒</h2>
+          <h2 className="mi-texto">Tu carrito está vacío</h2>
           <p>Agrega productos desde el menú para verlos aquí.</p>
         </div>
       </main>
@@ -96,7 +117,7 @@ export default function Carrito() {
         >
           <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content text-center p-4">
-              <h4 className="mi-texto">Pedido en proceso 🚚</h4>
+              <h4 className="mi-texto">Pedido en proceso</h4>
               <p>Redirigiendo a la página de pedidos...</p>
             </div>
           </div>
@@ -105,6 +126,7 @@ export default function Carrito() {
     </main>
   );
 }
+
 
 
 
