@@ -1,8 +1,38 @@
-version: "3.8"
+version: '3.8'
 
 services:
-  pasteleria:
+  # 1. Tu Aplicación
+  mi-app:
     build: .
-    container_name: pasteleria-react
     ports:
-      - "3000:80"
+      - "3000:3000"
+    container_name: mi-microservicio
+
+  # 2. Prometheus (Recoge las métricas)
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+
+  # 3. Grafana (Muestra los gráficos)
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3100:3000" # Entras por el puerto 3100
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    depends_on:
+      - prometheus
+
+  # 4. cAdvisor (Mide CPU y RAM de los contenedores - OBLIGATORIO para ver uso)
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
