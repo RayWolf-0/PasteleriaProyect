@@ -4,10 +4,9 @@ import { MemoryRouter } from 'react-router-dom';
 import Header from './Header';
 import { AuthContext } from '../auth/AuthContext';
 
-// 1. test para usuarios no logueados
-// Esta función envuelve el componente con los providers que necesita (Router y Auth)
+// Función helper para envolver el componente con los providers necesarios
 const renderWithProviders = (component, { authValue = {} } = {}) => {
-  // Valores por defecto para el contexto de autenticación (usuario no logueado)
+  // Valores por defecto (usuario no logueado)
   const defaultAuthValue = {
     isAuthenticated: false,
     user: null,
@@ -23,31 +22,31 @@ const renderWithProviders = (component, { authValue = {} } = {}) => {
   );
 };
 
-
-
+// 1. Test para usuarios NO logueados (Visitantes)
 describe('Header - Usuario No Autenticado', () => {
   beforeEach(() => {
     renderWithProviders(<Header />);
   });
 
   it('Debería mostrar el nombre principal de la pastelería', () => {
-    expect(screen.getByText(/Pastelería Mil Sabores/i)).toBeInTheDocument();
+    // Usamos toBeTruthy para máxima compatibilidad con Karma/Jasmine
+    expect(screen.getByText(/Pastelería Mil Sabores/i)).toBeTruthy();
   });
 
   it('Debería mostrar el logo con su texto alternativo', () => {
-    expect(screen.getByRole('img', { name: /logo pastelería/i })).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: /logo pastelería/i })).toBeTruthy();
   });
 
   it('Debería mostrar los links de navegación para visitantes', () => {
-    // Links que siempre son visibles
-    expect(screen.getByRole('link', { name: /inicio/i })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /blogs y noticias/i })).toBeInTheDocument();
+    // Links públicos
+    expect(screen.getByRole('link', { name: /inicio/i })).toBeTruthy();
+    expect(screen.getByRole('link', { name: /blogs y noticias/i })).toBeTruthy();
+    
+    // Links de autenticación
+    expect(screen.getByRole('link', { name: /login/i })).toBeTruthy();
+    expect(screen.getByRole('link', { name: /registro/i })).toBeTruthy();
 
-    // Links para usuarios no logueados
-    expect(screen.getByRole('link', { name: /login/i })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /registro/i })).toBeInTheDocument();
-
-    // Verificamos que los links de usuario logueado NO están
+    // Verificar que NO están los links protegidos
     expect(screen.queryByRole('link', { name: /perfil/i })).toBeNull();
     expect(screen.queryByRole('link', { name: /administrador/i })).toBeNull();
     expect(screen.queryByRole('button', { name: /salir/i })).toBeNull();
@@ -59,41 +58,39 @@ describe('Header - Usuario No Autenticado', () => {
   });
 
   it('Debería mostrar la barra de búsqueda y su botón', () => {
-    expect(screen.getByRole('searchbox')).toBeInTheDocument(); // El input tiene role 'searchbox'
-    expect(screen.getByRole('button', { name: /buscar/i })).toBeInTheDocument();
+    expect(screen.getByRole('searchbox')).toBeTruthy();
+    expect(screen.getByRole('button', { name: /buscar/i })).toBeTruthy();
   });
 });
 
-
-
-describe('Header - Usuario "user" Autenticado', () => {
+// 2. Test para usuarios logueados con rol "cliente"
+describe('Header - Usuario "cliente" Autenticado', () => {
   beforeEach(() => {
-    // user
     const authValue = {
       isAuthenticated: true,
-      user: { role: 'user', name: 'Juan' },
+      // CORRECCIÓN CLAVE: Usamos 'cliente' para coincidir con tu Header.jsx
+      user: { role: 'cliente', name: 'Juan' }, 
     };
     renderWithProviders(<Header />, { authValue });
   });
 
-  it('Debería mostrar los links específicos para el rol "user"', () => {
-    expect(screen.getByRole('link', { name: /perfil/i })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /carrito/i })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /pedido/i })).toBeInTheDocument();
+  it('Debería mostrar los links específicos para el rol "cliente"', () => {
+    expect(screen.getByRole('link', { name: /perfil/i })).toBeTruthy();
+    expect(screen.getByRole('link', { name: /carrito/i })).toBeTruthy();
+    expect(screen.getByRole('link', { name: /pedido/i })).toBeTruthy();
   });
 
   it('Debería mostrar el botón de "Salir" y no los de "Login" y "Registro"', () => {
-    expect(screen.getByRole('button', { name: /salir/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /salir/i })).toBeTruthy();
+    // No deberían estar los de acceso
     expect(screen.queryByRole('link', { name: /login/i })).toBeNull();
     expect(screen.queryByRole('link', { name: /registro/i })).toBeNull();
   });
 });
 
-
-
+// 3. Test para usuarios logueados con rol "admin"
 describe('Header - Usuario "admin" Autenticado', () => {
   beforeEach(() => {
-    // admin
     const authValue = {
       isAuthenticated: true,
       user: { role: 'admin', name: 'Admin' },
@@ -102,10 +99,10 @@ describe('Header - Usuario "admin" Autenticado', () => {
   });
 
   it('Debería mostrar el link de "Administrador"', () => {
-    expect(screen.getByRole('link', { name: /administrador/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /administrador/i })).toBeTruthy();
   });
 
-  it('No debería mostrar los links del rol "user" como Perfil o Carrito', () => {
+  it('No debería mostrar los links del rol "cliente" como Perfil o Carrito', () => {
     expect(screen.queryByRole('link', { name: /perfil/i })).toBeNull();
     expect(screen.queryByRole('link', { name: /carrito/i })).toBeNull();
   });
