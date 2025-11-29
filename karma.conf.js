@@ -3,8 +3,8 @@ module.exports = function (config) {
     basePath: '',
     frameworks: ['jasmine'],
     files: [
-      'src/setupTests.js', // carga configuración previa (RTL, matchers, cleanup)
-      'src/**/*.spec.js' // busca tests en src/
+      'src/setupTests.js', 
+      'src/**/*.spec.js'
     ],
     preprocessors: {
       'src/setupTests.js': ['webpack'],
@@ -27,11 +27,8 @@ module.exports = function (config) {
                 }
             }
         },
-          //regla para imágenes (jpg/png/gif/webp/svg)
           {
             test: /\.(png|jpe?g|gif|webp|svg)$/i,
-            //use: [{ loader: 'null-loader' }], // Para no cargar imagenes (npm i -D null-loader).
-            //type: 'asset/resource', //Cargar imagenes.
             type: 'asset/inline',
           }
         ]
@@ -43,7 +40,7 @@ module.exports = function (config) {
 
     reporters: ['spec', 'coverage'],
     specReporter: {
-      suppressPassed: false, // muestra los passed
+      suppressPassed: false,
       suppressSkipped: true,
       showSpecTiming: true
     },
@@ -53,7 +50,21 @@ module.exports = function (config) {
       dir: 'coverage/'
     },
 
-    browsers: ['ChromeHeadless'],
+    // --- INICIO DE LA CORRECCIÓN ---
+    
+    // 1. Definimos un lanzador personalizado con el flag --no-sandbox
+    customLaunchers: {
+      ChromeHeadlessCI: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox', '--disable-gpu'] 
+      }
+    },
+
+    // 2. Usamos ese lanzador en lugar del normal
+    browsers: ['ChromeHeadlessCI'], 
+    
+    // --- FIN DE LA CORRECCIÓN ---
+
     singleRun: true,
     colors: true,
     logLevel: config.LOG_INFO
